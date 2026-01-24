@@ -18,7 +18,7 @@ public:
     }
     ~Item()
     {
-        cout <<name<<" object is destroying..." << endl;
+        cout << name << " object is destroying..." << endl;
     }
     // Method declaration only inside my class this is allowed:
     void show();
@@ -58,6 +58,7 @@ class Snacks : public Item
 {
 private:
     int calories;
+
 public:
     Snacks(string name, double price, int calories) : Item(name, price)
     {
@@ -80,30 +81,41 @@ void Item ::show(bool showprice)
 }
 void Beverage ::displayBeverage()
 {
+    show(true);
     cout << "Beverage Size is :" << size << endl;
     cout << "Temperature is :" << state << endl;
 }
 void Snacks ::displaySnack()
 {
+    show(true);
     cout << "Snack calories is " << calories << endl;
 }
 
 int main()
 {
-    Item Burger("Beef Burger", 979.99);
+    Item i1("Beef Burger", 979.99);
+    Item i2("Pizza", 1989.99);
     // Burger.show();
-    Burger.show(true);
+    i1.show(true);
+    i2.show(true);
 
     Beverage b1("Tea", 120, "Medium", "Hot"); // Beverage(string name, double price,string size, string state)
-    Beverage b2("Milkshake", 120, "Large", "Cold");
-    b1.show(true); // it is function overloading(polymorphism)
-    b1.displayBeverage();
+    Beverage b2("Milkshake", 130, "Large", "Cold");
 
-    Snacks s1("Doracake", 270, 187.59);
+    cout << "<\n---Beverages list---> \n"
+         << endl;
+    b1.displayBeverage();
+    b2.displayBeverage();
+
+    Snacks s1("Dora cake", 270, 187.59);
     Snacks s2("Pancake", 190, 236.76);
-    s1.show();
-    s2.show();
+
+    cout << "\n<---Snacks list is---> \n"
+         << endl;
     s1.displaySnack();
+    s2.displaySnack();
+
+    cout << endl;
     
     return 0;
 }
