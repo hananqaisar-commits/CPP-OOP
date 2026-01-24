@@ -12,31 +12,34 @@ using namespace std;
 // 2.Runs automatically when an object is created
 // 3.Is used to initialize data
 
-class car
+class Car
 {
 
 public:
     string company;
-    // 1 type is default in c++:
-    // car()
-    // {
-    //     cout << "This  is non parameterized constructor";
-    // }
-
-    //2 type is:
-    car(string name)
+    // 1st type is default in c++:
+    Car(){}//here i write default constructor bcz i create obj like Car car1,car2
+    //2nd type is:
+    Car(string name)
     {
         company = name;
     }
-
     //3 type is:
-    car();
+    Car (const Car &carProp){
+        cout<<"This is manually made copy constructor"<<endl;
+        this->company=carProp.company;
+    }
+    
 };
-
 int main()
 {
     int n;
-    car car1("Toyota");
-    cout<<"Company name is :"<<car1.company<<endl;
+    Car car1("Toyota"),car2;
+    car2=car1;//This is copy constructor made by me 
+    Car car3(car1);//This is also called copy constructor but in this compiler invokes their own copy constructor
+    Car car4=car1;//here copy constructor is invoked made by me
+    cout<<"Company name is : "<<car1.company<<endl;
+    cout<<"Company name is : "<<car2.company<<endl;
+    cout<<"Company name is : "<<car3.company<<endl;
     
 }
