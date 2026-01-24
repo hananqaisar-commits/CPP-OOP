@@ -58,7 +58,6 @@ class Snacks : public Item
 {
 private:
     int calories;
-
 public:
     Snacks(string name, double price, int calories) : Item(name, price)
     {
