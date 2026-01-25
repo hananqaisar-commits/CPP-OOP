@@ -83,7 +83,7 @@ int main()
 
     compareMarks(s1, s2);
 
-    cout<<"Total studens is "<<Student :: totalStudents <<endl;//it is way to access freind function in main body
+    cout<<"Total studens is "<<Student :: totalStudents <<endl;//it is way to access freind function in main bode
 
     return 0;
 }
