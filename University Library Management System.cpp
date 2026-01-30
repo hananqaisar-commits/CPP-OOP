@@ -22,22 +22,28 @@ public:
     {
         cout << "Item " << title << " is destroyed" << endl;
     }
-    void setTitle();
+
+    void setTitle()
+    {
+        cout << "Enter name of Book: ";
+        getline(cin, title);
+    }
     string getTitle()
     {
         return title;
+    }
+    void setId()
+    {
+        cout << "Enter Student registration ID: : ";
+        cin >> itemid;
     }
     int getid()
     {
         return itemid;
     }
 };
-int LibraryItem ::totalcount = 0;
-void LibraryItem ::setTitle()
-{
-    cout << "Enter name of Book:";
-    getline(cin, title);
-}
+int LibraryItem ::totalcount = 0; // initilizing static totalCount to 0.And remember static belong to class itself it is not object of class
+// Every object of LibraryItem shares the same totalcount.
 
 class Book : public LibraryItem
 {
@@ -45,38 +51,63 @@ class Book : public LibraryItem
     int price;
 
 public:
-    Book(string author, int price) : LibraryItem()
+    void input();
+    void setPrice()
     {
-        this->author = author;
-        this->price = price;
+        cout << "Enter price: ";
+        cin >> price;
     }
-
+    void setowner()
+    {
+        cin.ignore();//this remove the last newline from buffer which will come from owner name line
+        cout << "\nEnter owner name: ";
+        getline(cin, author);
+    }
+    string getowner()
+    {
+        return author;
+    }
     void displayBookInfo();
 };
 void Book ::displayBookInfo()
 {
 
-    cout << "Book Title is " << getTitle() << endl;
+    cout << "\nBook Title is " << getTitle() << endl;
     cout << "Book Author is " << author << endl;
-    cout << "Book Id is " << getid() << endl;
+    cout << "Student registration ID is " << getid() << endl;
     cout << "Book Price is " << price << endl;
 }
 
-// class Magzine : public LibraryItem
-// {
-// private:
+void Book ::input()
+{
+    setowner();
+    setTitle();
+    setId();
+    setPrice();
+}
 
-// };
 int main()
 {
+    int book;
+    cout << "How many book? ";
+    cin >> book;
 
-    Book b1("Hanan Qaisar", 7099), b2("Ali Hamza", 5789);
-    b1.setTitle();
-    b2.setTitle();
-    b1.displayBookInfo();
-    b2.displayBookInfo();
+    Book **bptr = new Book *[book];
 
-    LibraryItem :: getTotal();
+    for (int i = 0; i < book; i++)
+    {
+        bptr[i] = new Book(); 
+        bptr[i]->input();
+        
+    }
+    for (int i = 0; i < book; i++)
+    {
+        bptr[i]->displayBookInfo();
+        delete bptr[i];
+    }
+    
+
+    LibraryItem ::getTotal();
 
     return 0;
 }
