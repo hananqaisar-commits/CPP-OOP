@@ -74,11 +74,10 @@ void Account::withdraw()
 }
 void Account::display()
 {
-    cout<<"\nTotal Account exists: "<<countAcoount<<endl;
+    cout << "\nTotal Account exists: " << countAcoount << endl;
     cout << "Acount owner is: " << holderName << endl;
     cout << "Acount id is: " << accountNumber << endl;
     cout << "Available balance is: " << balance << endl;
-
 }
 int Account::calculateIntrest()
 {
@@ -91,9 +90,14 @@ int Account::countAcoount = 1; // static varialble here i initilized it with 1.E
 int main()
 {
     SavingAccounts *C1 = new SavingAccounts("HQ1493", "Hanan Qaisar", 1000.00, 11);
+    SavingAccounts *C2 = new SavingAccounts("AQ42323", "Ahtisham Qaisar", 1056.00, 17);
     C1->deposit();
     C1->withdraw();
     C1->display();
+
+    C2->deposit();
+    C2->withdraw();
+    C2->display();
 
     return 0;
 }
