@@ -19,6 +19,7 @@ class BankAccount
     string name;
     unsigned long long int balance;
     int chance;
+    double deduct_balance = 0; // saving it from garbage value
 
 public:
     BankAccount(int account, string name, int balance, int pin, int chance)
@@ -140,7 +141,8 @@ void BankAccount ::display()
     loader_dot();
     cout << "Account Owner: " << name << endl;
     cout << "Account id " << accNo << endl;
-    cout << "Balance: " << balance << endl;
+    cout << "Remaining Balance: " << balance << endl;
+    cout << "Deducted Transaction fees + Tax: " << deduct_balance << endl;
 }
 bool BankAccount ::checkPin()
 {
@@ -246,10 +248,12 @@ void BankAccount ::transferFunds()
 
     int amount;
     string account;
+
     char ch;
 
+    cin.ignore();
     cout << "Enter receiver Account number: ";
-    cin >> account;
+    getline(cin, account);
 
     cout << "Enter amount: ";
     cin >> amount;
@@ -269,15 +273,20 @@ void BankAccount ::transferFunds()
             loader_dot();
             if (amount > 50000)
             {
-                balance = balance - ((amount * 0.03) + 60); // deduct tax 3 percent if amount is grater then 50,000
+                deduct_balance = ((amount * 0.03) + 60); // deduct tax 3 percent if amount is grater then 50,000
             }
-            balance = (balance - amount) + 60; // deduct amout from sender
+            else if (amount <= 50000)
+            {
+                deduct_balance = 60; // fixed charges for transaction
+            }
+            balance -= (amount + deduct_balance); // i am adding transfer amount + taxes to deduct from my account balance
+            // deduct amout from sender
             // here i have also add amount to user
             // then transaction must have to save for record
             cout << "Transfer Sucessful" << endl;
 
-            cout << endl;
             display();
+            cout << endl;
         }
         else if (ch == 'n' || ch == 'N')
         {
