@@ -356,16 +356,12 @@ void BankAccount ::changePin()
 int main()
 {
     int choice;
-    int pin = 1234;
+
+    int pin1 = 1234;
 
     string name1 = "Hanan Qaisar";
-    string name2 = "Ahtisham Qaisar";
-    string name3 = "Waqar Younis";
-    BankAccount account1(1199, name1, 0, pin, 3);
-    BankAccount account2(1200, name2, 0, pin, 3);
-    BankAccount account3(1201, name3, 0, pin, 3);
 
-    existingAccount(name1, name2, name3);
+    BankAccount account1(1199, name1, 0, pin1, 3);
 
     if (account1.insertCard())
     {
@@ -383,10 +379,8 @@ int main()
             cout << "| 3. Check Balance |\n";
             cout << "| 4. Display Info  |\n";
             cout << "| 5. Transactions  |\n";
-            cout << "| 6. Change Pin 
-                |\n ";
-                     cout
-                     << "| 0. Exit          |\n";
+            cout << "| 6. Change Pin    |\n";
+            cout << "| 0. Exit          |\n";
             cout << "|==================|\n";
             cout << "-> ";
 
