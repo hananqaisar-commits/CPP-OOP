@@ -3,39 +3,41 @@ using namespace std;
 
 int main()
 {
-
     int number;
 
+    // Ask user how many rows the diamond should have
     cout << "How many number of rows? ";
     cin >> number;
 
-    for (int i = 1; i <= number; i++)
+    for (int i = 1; i <= number; i++) // i = current row
     {
+        // Print spaces before stars
         for (int k = number; k > i; k--)
         {
             cout << " ";
         }
+
+        // Print stars for this row
         for (int j = 0; j < 2 * i - 1; j++)
         {
             cout << "*";
         }
 
-        cout << "\n";
+        cout << endl; // Move to next row
     }
 
-    for (int i = number; i >= 1; i--)
+    for (int i = number - 1; i >= 1; i--) // start from one row below middle
     {
-        for (int k = number - 1; k < i; k++)
+        // Print spaces before stars
+        for (int k = number; k > i; k--)
         {
             cout << " ";
         }
-        for (int j = 2 * i - 1; j < 0; j--)
+
+        // Print stars for this row
+        for (int j = 0; j < 2 * i - 1; j++)
         {
             cout << "*";
         }
 
-        cout << "\n";
-    }
-
-    return 0;
-}
+        cout <
