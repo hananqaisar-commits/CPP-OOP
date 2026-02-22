@@ -11,7 +11,7 @@ using namespace std;
 // 1.Has same name as class
 // 2.Runs automatically when an object is created
 // 3.Is used to initialize data
-
+// 4.had no returntype
 class Car
 {
 

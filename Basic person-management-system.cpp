@@ -30,7 +30,10 @@ public:
     }
     void set_age(int a)
     {
-        age = a;
+        if (age > 0)
+            age = a;
+        else
+            age = 0;
     }
     int get_age()
     {
@@ -46,19 +49,24 @@ private:
 
 public:
     // constructor:
-    Student() {} // default
+    Student() {} // default Constructor
     Student(string name, int age, int roll_no, string grade) : Person(name, age)
     {
         this->grade = grade;
         this->roll_no = roll_no;
     }
-    ~Student()
+    ~Student() // this si destructor in C++ foe destroy objects automatically
     {
         cout << "Destructor destroy the properties of Student object...\n";
     }
     void set_rollno(int n)
     {
-        roll_no = n;
+        if (roll_no > 0)
+        {
+            roll_no = n;
+        }
+        else
+            roll_no = 0;
     }
     int get_rollno()
     {
@@ -174,14 +182,20 @@ void Teacher::input_teacher()
 int main()
 {
 
-    Student s1;
-    Teacher t1;
+    Student s1, s2;
+    Teacher t1, t2;
     // Input
     s1.input_student();
     s1.show_info();
 
     t1.input_teacher();
     t1.show_info_classteacher();
+
+    s2.input_student();
+    s2.show_info();
+
+    t2.input_teacher();
+    t2.show_info_classteacher();
 
     // Functions
     // show_info(age, name, grade, rollno);  //it will invoke my constructor
