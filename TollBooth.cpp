@@ -70,9 +70,9 @@ void TollBooth ::Rates_chart()
 
 {
 
-    cout << "Bike--------->0.00 rs/-\n";
-    cout << "Car---------->0.35 rs/-\n";
-    cout << "Vagon-------->0.45 rs/-\n";
+    cout << "Bike Parking--------->0.00 rs/-\n";
+    cout << "Car Parking---------->0.35 rs/-\n";
+    cout << "Vagonn-------->0.45 rs/-\n";
     cout << "Bus---------->0.50 rs/-\n";
     cout << "Truck-------->0.80 rs/-\n";
     cout << "Others------->0.15 rs/-\n";
