@@ -1,4 +1,4 @@
-#include <iostream>
+include <iostream>
 using namespace std;
 
 class TollBooth
@@ -31,7 +31,7 @@ public:
     {
         return shift;
     }
-    bool payingcar();
+    bool  payingcar();
     void nopaycar();
     void report();
     void inputCarType();
@@ -43,8 +43,9 @@ int TollBooth::totalcars;
 
 bool TollBooth ::payingcar()
 {
-
+	
     ++totalcars;
+      return true;
 }
 void TollBooth ::nopaycar()
 {
