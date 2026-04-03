@@ -4,89 +4,114 @@ A structured collection of Object-Oriented Programming concepts and projects bui
 
 ---
 
-## Repository Structure
-```
-CPP-OOP/
-├── Cpp-OOP-Basics/               # Core OOP concept exercises
-└── Projects/
-    ├── ATM-simulation-oop.cpp
-    ├── Bank Account System.cpp
-    ├── Basic School Management.cpp
-    ├── Basic person-management-system.cpp
-    ├── Smart Coffee Shop System.cpp
-    ├── Student Examination System.cpp
-    ├── TollBooth.cpp
-    ├── University Library Management System.cpp
-    └── Security Analyzer.cpp
-```
 
 ---
 
-## Topics Covered
+## 📚 Topics Covered
 
-| Topic | Concepts |
-|---|---|
-| Classes & Objects | Constructors, instance variables, methods |
-| Encapsulation | Private fields, getters & setters |
-| Inheritance | Parent/child classes, method overriding |
-| Polymorphism | Method overloading, runtime polymorphism |
-| Object Pointers | Pointer-based object access |
-| Control Flow | Loops, conditionals inside OOP context |
+| Topic | Concepts | Files |
+|---|---|---|
+| **Classes & Objects** | Constructors, instance variables, methods | Cpp-OOP-Basics/ |
+| **Encapsulation** | Private fields, getters & setters | Person-management-system.cpp |
+| **Inheritance** | Parent/child classes, method overriding | School Management, Library System |
+| **Polymorphism** | Method overloading, runtime polymorphism | ATM Simulation, Bank System |
+| **Object Pointers** | Pointer-based object access | Library Management System |
+| **Control Flow** | Loops, conditionals in OOP context | All projects |
+| **Memory Management** | Dynamic allocation, object lifecycle | Projects directory |
 
 ---
 
-## Projects
+## 🎯 Projects
 
-### ATM Simulation
+### 1. ATM Simulation
+**File:** `Projects/ATM-simulation-oop.cpp`
+
 Simulates a basic ATM system with core banking operations.
 - PIN verification
 - Balance inquiry
 - Deposit & withdrawal
+- Transaction history
 
-### Bank Account System
+### 2. Bank Account System
+**File:** `Projects/Bank Account System.cpp`
+
 Models multiple account types with deposits, withdrawals, and account management.
+- Savings Account
+- Checking Account
+- Account operations
 
-### University Library Management System
+### 3. University Library Management System
+**File:** `Projects/University Library Management System.cpp`
+
 Manages books and library operations using object pointers and class hierarchies.
+- Book inventory
+- Member management
+- Issue/Return tracking
 
-### Student Examination System
+### 4. Student Examination System
+**File:** `Projects/Student Examination System.cpp`
+
 - Input student records
 - Record and store scores
 - Calculate and display results
+- Generate report cards
 
-### Smart Coffee Shop System
+### 5. Smart Coffee Shop System
+**File:** `Projects/Smart Coffee Shop System.cpp`
+
 Simple order and billing system for a coffee shop using OOP design.
+- Menu management
+- Order processing
+- Bill calculation
 
-### Toll Booth System
+### 6. Toll Booth System
+**File:** `Projects/TollBooth.cpp`
+
 - Display vehicle price chart
 - Accept vehicle type input
 - Calculate total daily collection
 
-### Basic School Management
-Models a school system with proper code indentation and structure.
+### 7. Basic School Management
+**File:** `Projects/Basic School Management.cpp`
 
-### Person Management System
+Models a school system with proper code indentation and structure.
+- Student records
+- Class management
+
+### 8. Person Management System
+**File:** `Projects/Basic person-management-system.cpp`
+
 Basic person record system demonstrating encapsulation fundamentals.
 
-### Security Analyzer
+### 9. Security Analyzer
+**File:** `Projects/Security Analyzer.cpp`
+
 Explores class and object structure through a security-focused program.
 
 ---
 
-## How to Run
+## ⚙️ Prerequisites
+
+- **C++ Compiler:** GCC (g++), Clang, or MSVC
+- **C++ Standard:** C++17 or higher
+- **Operating System:** Windows, Linux, macOS
+- **Knowledge:** Basic programming concepts
+
+### Required Tools
+
 ```bash
-# Compile any file
-g++ FileName.cpp -o output
+# Check if g++ is installed
+g++ --version
 
-# Run it (Windows)
-output.exe
+# If not installed:
+# Ubuntu/Debian
+sudo apt-get install g++
 
-# Run it (Linux/Mac)
-./output
-```
+# macOS
+brew install gcc
 
-Requires **g++ (GCC)** or any C++17 compatible compiler.
-
+# Windows
+# Download MinGW or use Visual Studio
 ---
 
 ## About
