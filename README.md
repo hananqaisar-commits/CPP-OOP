@@ -18,78 +18,76 @@ Student: <br>
 > Core C++ & OOP Principles
 <br>
 > CPP_OOP
----
+
 ---
 ## Directory Structure
 ```
-
-├── CPP-OOP
-│   ├── C++ Patterns
-│   │   ├── 01_alphabet_triangle.cpp
-│   │   ├── 02_continuous_alphabet_grid.cpp
-│   │   ├── 03_left_star_triangle.cpp
-│   │   ├── 04_inverted_star_triangle.cpp
-│   │   ├── 05_hourglass_star.cpp
-│   │   ├── 06_right_growing_triangle.cpp
-│   │   ├── 07_right_shrinking_triangle.cpp
-│   │   ├── 08_right_spaced_triangle.cpp
-│   │   ├── Alphabet_Triangle.cpp
-│   │   ├── Continuous_Alphabet_Grid.cpp
-│   │   ├── hourglass_star.cpp
-│   │   ├── inverted_star_triangle.cpp
-│   │   ├── Left_Aligned_Triangle.cpp
-│   │   ├── README.md
-│   │   ├── Right_aligned_growing_triangle.cpp
-│   │   ├── Right_aligned_shrinking_triangle.cpp
-│   │   └── Right_aligned_spaced_star_triangle.cpp
-│   ├── Cpp-OOP-Basics
-│   │   ├── Abstraction.cpp
-│   │   ├── Array  Passing in function.cpp
-│   │   ├── Class & Object.cpp
-│   │   ├── Count Words in sentence.cpp
-│   │   ├── deepCopy & shallowCopy.cpp
-│   │   ├── Diamond.cpp
-│   │   ├── Fibbonachi.cpp
-│   │   ├── File Handling
-│   │   │   ├── Record.txt
-│   │   │   ├── Task1.cpp
-│   │   │   └── task2.cpp
-│   │   ├── Object Array Practise.cpp
-│   │   ├── Password Generator.cpp
-│   │   ├── Static & Friend Function.cpp
-│   │   ├── Table.cpp
-│   │   ├── Type_cunstructor.cpp
-│   │   └── Types_Inheritance.cpp
-│   ├── Projects
-│   │   ├── ATM-simulation-oop.cpp
-│   │   ├── Bank Account System.cpp
-│   │   ├── Basic person-management-system.cpp
-│   │   ├── Basic School Management.cpp
-│   │   ├── Polymorphism_Practise.cpp
-│   │   ├── Security Analyzer.cpp
-│   │   ├── Smart Coffee Shop System.cpp
-│   │   ├── Student Examination System.cpp
-│   │   ├── TollBooth.cpp
-│   │   └── University Library Management System.cpp
-│   └── Projects C++ OOP
-│       ├── ATM-simulation-oop.cpp
-│       ├── Bank Account System.cpp
-│       ├── Basic person-management-system.cpp
-│       ├── Basic School Management.cpp
-│       ├── Library Management System (Console Based)
-│       │   └── Library_Management.cpp
-│       ├── Polymorphism_Practise.cpp
-│       ├── Security Analyzer.cpp
-│       ├── Smart Coffee Shop System.cpp
-│       ├── Student Examination System.cpp
-│       ├── TollBooth.cpp
-│       └── University Library Management System.cpp
-└── git.sh
+├── C++ Patterns
+│   ├── 01_alphabet_triangle.cpp
+│   ├── 02_continuous_alphabet_grid.cpp
+│   ├── 03_left_star_triangle.cpp
+│   ├── 04_inverted_star_triangle.cpp
+│   ├── 05_hourglass_star.cpp
+│   ├── 06_right_growing_triangle.cpp
+│   ├── 07_right_shrinking_triangle.cpp
+│   ├── 08_right_spaced_triangle.cpp
+│   ├── Alphabet_Triangle.cpp
+│   ├── Continuous_Alphabet_Grid.cpp
+│   ├── hourglass_star.cpp
+│   ├── inverted_star_triangle.cpp
+│   ├── Left_Aligned_Triangle.cpp
+│   ├── README.md
+│   ├── Right_aligned_growing_triangle.cpp
+│   ├── Right_aligned_shrinking_triangle.cpp
+│   └── Right_aligned_spaced_star_triangle.cpp
+├── Cpp-OOP-Basics
+│   ├── Abstraction.cpp
+│   ├── Array  Passing in function.cpp
+│   ├── Class & Object.cpp
+│   ├── Count Words in sentence.cpp
+│   ├── deepCopy & shallowCopy.cpp
+│   ├── Diamond.cpp
+│   ├── Fibbonachi.cpp
+│   ├── File Handling
+│   │   ├── Record.txt
+│   │   ├── Task1.cpp
+│   │   └── task2.cpp
+│   ├── Object Array Practise.cpp
+│   ├── Password Generator.cpp
+│   ├── Static & Friend Function.cpp
+│   ├── Table.cpp
+│   ├── Type_cunstructor.cpp
+│   └── Types_Inheritance.cpp
+├── Projects
+│   ├── ATM-simulation-oop.cpp
+│   ├── Bank Account System.cpp
+│   ├── Basic person-management-system.cpp
+│   ├── Basic School Management.cpp
+│   ├── Polymorphism_Practise.cpp
+│   ├── Security Analyzer.cpp
+│   ├── Smart Coffee Shop System.cpp
+│   ├── Student Examination System.cpp
+│   ├── TollBooth.cpp
+│   └── University Library Management System.cpp
+├── Projects C++ OOP
+│   ├── ATM-simulation-oop.cpp
+│   ├── Bank Account System.cpp
+│   ├── Basic person-management-system.cpp
+│   ├── Basic School Management.cpp
+│   ├── Library Management System (Console Based)
+│   │   └── Library_Management.cpp
+│   ├── Polymorphism_Practise.cpp
+│   ├── Security Analyzer.cpp
+│   ├── Smart Coffee Shop System.cpp
+│   ├── Student Examination System.cpp
+│   ├── TollBooth.cpp
+│   └── University Library Management System.cpp
+└── README.md
 
 ```
----
 
-### Required Tools:
+
+## Required Tools:
 ```bash
 g++ --version
 
@@ -182,5 +180,5 @@ Basic person record system demonstrating encapsulation fundamentals.
 Explores class and object structure through a security-focused program.
 
 ---
----
-> ## *"It always seems impossible until it’s done"*
+
+> *"It always seems impossible until it’s done"*
