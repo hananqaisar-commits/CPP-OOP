@@ -13,11 +13,8 @@
 
 ## About
 Student: <br>
-> Hanan Qaisar
-<br>
-> Core C++ & OOP Principles
-<br>
-> CPP_OOP
+>  Hanan Qaisar <br>
+>  C++ Developer | OOP | Problem Solver
 
 ---
 ## Directory Structure
