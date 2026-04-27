@@ -2,6 +2,7 @@
 ---
 > A collection of Java Object-Oriented Programming projects and assignments.
 <br>
+
 ![C++](https://img.shields.io/badge/CPP-OOP-orange?style=flat-square&logo=java)
 ![Status](https://img.shields.io/badge/Status-Actively%20Learning-brightgreen?style=flat-square)
 ![Student](https://img.shields.io/badge/Student-Hanan%20Qaisar-blue?style=flat-square)
@@ -11,10 +12,12 @@
 ---
 
 ## About
-**Student:**
-Hanan Qaisar
- **Focus:** Core C++ & OOP Principles
- **Repository:**CPP_OOP
+Student: <br>
+> Hanan Qaisar
+<br>
+> Core C++ & OOP Principles
+<br>
+> CPP_OOP
 ---
 ---
 ## Directory Structure
@@ -179,3 +182,5 @@ Basic person record system demonstrating encapsulation fundamentals.
 Explores class and object structure through a security-focused program.
 
 ---
+---
+> ## *"It always seems impossible until it’s done"*
