@@ -48,8 +48,7 @@ public:
         tail = newNode;
     }
 
-    void
-    printLinkedlist()
+    void printLinkedlist()
     {
         Node *current = head;
         while (current != nullptr)
@@ -285,9 +284,7 @@ public:
         Node *current = head;
 
         if (head == nullptr)
-        {
             return;
-        }
 
         while (current != nullptr)
         {
@@ -306,25 +303,21 @@ public:
     {
         Node *current = head;
         if (head == nullptr)
-        {
             return false;
-        }
+
         int found = 0;
+
         while (current != nullptr)
         {
             if (target1 == current->data)
-            {
                 found++;
-            }
-            else if (target2 == current->data)
-            {
+
+            if (target2 == current->data)
                 found++;
-            }
 
             if (found == 2)
-            {
                 return true;
-            }
+
             current = current->next;
         }
 
@@ -340,9 +333,7 @@ public:
             for (Node *current = head; current != nullptr; current = current->next)
             {
                 if (current->data == target1)
-                {
                     temp = current; // now we find 1st node and in 2nd loop we will find 2nd Node and swap data
-                }
             }
             for (Node *current = head; current != nullptr; current = current->next)
             {
@@ -364,23 +355,23 @@ public:
             Node *temp1 = nullptr;
             Node *temp2 = nullptr;
 
-            // Find target1 node
             for (Node *current = head; current != nullptr; current = current->next)
             {
-                if (current->data == target1)
+                if (current->data == target1 && temp1 == nullptr)
                 {
                     temp1 = current;
                 }
-            }
-            // Find target2 node
-            for (Node *current = head; current != nullptr; current = current->next)
-            {
-                if (current->data == target2)
+
+                if (current->data == target2 && temp2 == nullptr)
                 {
                     temp2 = current;
                 }
-            }
 
+                if (temp1 != nullptr && temp2 != nullptr)
+                {
+                    break;
+                }
+            }
             if (temp1 == temp2)
             {
                 return;
@@ -393,44 +384,96 @@ public:
             Node *secondNext = temp2->next;
             Node *secondPrevious = temp2->previous;
 
-            // now both nodes are adjacent then (temp1 is directly before temp2)
-            if (firstNext == temp2)
+            // if both nodes are adjacent then:
+            if (temp1->next == temp2)
             {
-                temp2->previous = firstPrevious;
                 temp2->next = temp1;
-
-                temp1->previous = temp2;
-                temp1->next = secondNext;
-
                 if (firstPrevious != nullptr)
                 {
+                    temp2->previous = firstPrevious;
                     firstPrevious->next = temp2;
                 }
+                else
+                {
+                    head = temp2;
+                }
+
+                temp1->next = secondNext;
+                temp1->previous = temp2;
+
                 if (secondNext != nullptr)
                 {
                     secondNext->previous = temp1;
                 }
+                else
+                {
+                    tail = temp1;
+                }
             }
-            // adjacent but temp2 is directly before temp1
-            else if (secondNext == temp1)
+            else if (temp2->next == temp1) // now check reverse adjacent case
             {
+                if (secondPrevious != nullptr)
+                {
+                    secondPrevious->next = temp1;
+                }
+                else
+                {
+                    head = temp1;
+                }
+
+                if (firstNext != nullptr)
+                {
+                    firstNext->previous = temp2;
+                }
+                else
+                {
+                    tail = temp2;
+                }
+
                 temp1->previous = secondPrevious;
                 temp1->next = temp2;
 
                 temp2->previous = temp1;
                 temp2->next = firstNext;
+            }
+            // if temp1 is head and temp 2 is tail then:
+            else if (temp1 == head && temp2 == tail)
+            {
+                temp1->next->previous = temp2; // temp1 will mine new tail
+                temp2->next = firstNext;
+                temp2->previous = firstPrevious;
 
-                if (secondPrevious != nullptr)
-                {
-                    secondPrevious->next = temp1;
-                }
+                secondPrevious->next = temp1; // now temp2 will mine new head
+                temp1->next = secondNext;
+                temp1->previous = secondPrevious;
+
+                // now chng head and tail bcz head and tail pointer swapped in this case
+                head = temp2;
+                tail = temp1;
+            }
+
+            else if (temp1 == head && temp2 != tail)
+            {
+                temp2->next = firstNext;
+                temp2->previous = firstPrevious;
                 if (firstNext != nullptr)
                 {
                     firstNext->previous = temp2;
                 }
+
+                temp1->next = secondNext;
+                temp1->previous = secondPrevious;
+                if (secondNext != nullptr)
+                {
+                    secondNext->previous = temp1;
+                }
+                if (secondPrevious != nullptr)
+                {
+                    secondPrevious->next = temp1;
+                }
+                head = temp2;
             }
-            // nodes are not adjacent
-            else
+            else if (temp2 == tail && temp1 != head)
             {
                 temp1->next = secondNext;
                 temp1->previous = secondPrevious;
@@ -438,14 +481,34 @@ public:
                 temp2->next = firstNext;
                 temp2->previous = firstPrevious;
 
+                if (secondPrevious != nullptr)
+                {
+                    secondPrevious->next = temp1;
+                }
+
                 if (firstPrevious != nullptr)
                 {
                     firstPrevious->next = temp2;
                 }
+
                 if (firstNext != nullptr)
                 {
                     firstNext->previous = temp2;
                 }
+
+                tail = temp1;
+            }
+            // now if nodes are not adjacent
+            else if (temp1->next != temp2)
+            {
+                // chng the node links first
+                temp1->next = secondNext;
+                temp1->previous = secondPrevious;
+
+                temp2->next = firstNext;
+                temp2->previous = firstPrevious;
+
+                // chng links of neigbours of second node
                 if (secondPrevious != nullptr)
                 {
                     secondPrevious->next = temp1;
@@ -454,24 +517,16 @@ public:
                 {
                     secondNext->previous = temp1;
                 }
-            }
 
-            if (head == temp1)
-            {
-                head = temp2;
-            }
-            else if (head == temp2)
-            {
-                head = temp1;
-            }
-
-            if (tail == temp1)
-            {
-                tail = temp2;
-            }
-            else if (tail == temp2)
-            {
-                tail = temp1;
+                // now chng links of neigbpurs first nodes
+                if (firstPrevious != nullptr)
+                {
+                    firstPrevious->next = temp2;
+                }
+                if (firstNext != nullptr)
+                {
+                    firstNext->previous = temp2;
+                }
             }
         }
     }
