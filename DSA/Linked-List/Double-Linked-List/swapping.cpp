@@ -133,10 +133,38 @@ public:
                 found2Previous->next = found1;
             if (found1Next != nullptr)
                 found1Next->previous = found2;
+
+            // if only there is two nodes which is head and tail
+            if (found2 == head && found1 == tail)
+            {
+                head = found1;
+                tail = found2;
+            }
         }
+        // now case 3: non-adjacent nodes of linkedlist
         else
         {
-            
+            // put found2 at found1's old position
+            found2->next = found1Next;
+            found2->previous = found1Previous;
+
+            // put found1 at found2's old position
+            found1->next = found2Next;
+            found1->previous = found2Previous;
+
+            // fix neighbours of found1's old position
+            if (found1Previous != nullptr)
+                found1Previous->next = found2;
+
+            if (found1Next != nullptr)
+                found1Next->previous = found2;
+
+            // fix neighbours of found2's old position
+            if (found2Previous != nullptr)
+                found2Previous->next = found1;
+
+            if (found2Next != nullptr)
+                found2Next->previous = found1;
         }
     }
 };
