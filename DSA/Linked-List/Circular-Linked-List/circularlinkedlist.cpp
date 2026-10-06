@@ -11,8 +11,8 @@ template <typename object>
 class circularLinkedList
 {
 public:
-    Node<int> *head = nullptr;
-    Node<int> *tail = nullptr;
+    Node<object> *head = nullptr;
+    Node<object> *tail = nullptr;
     // constructor
     circularLinkedList()
     {
@@ -20,7 +20,7 @@ public:
 
     void insertAtEnd(object value)
     {
-        Node<int> *newNode = new Node<int>();
+        Node<object> *newNode = new Node<object>();
 
         newNode->data = value;
 
@@ -43,7 +43,7 @@ public:
 
     void insertAtStart(object value)
     {
-        Node<int> *newNode = new Node<int>();
+        Node<object> *newNode = new Node<object>();
         newNode->data = value;
 
         if (head == nullptr)
@@ -61,26 +61,87 @@ public:
     }
     void doublyClear()
     {
-        Node<int> *current = head;
-        Node<int> *victim = nullptr;
+        Node<object> *current = head;
+
         if (head == nullptr)
             return;
         else
         {
             do
             {
-                victim = current;
+                Node<object> *victim = current;
                 current = current->next; // move current one by one and delete that victim untill current is not equal to nullptr
                 delete victim;
             } while (current != head);
+            // at last it imp to specify head and tail to null
+            head = nullptr;
+            tail = nullptr;
         }
     }
-    void printList()
+
+    void insertAfterValue(object vlaue, object after)
     {
-        Node<int> *current = head;
-        if (current == nullptr) // current is nullptr mean the list is empty so return empty from this point
+        Node<object> *newNode = new Node<object>();
+        Node<object> *current = head;
+        newNode->data = vlaue;
+
+        if (head == nullptr)
             return;
 
+        do
+        {
+            if (current->data == after)
+            {
+                if (current == tail)
+                {
+                    newNode->next = head; // circular link
+                    tail = newNode;
+                    current->next = newNode;
+                    return;
+                }
+                newNode->next = current->next;
+                current->next = newNode;
+                return;
+            }
+            current = current->next;
+        } while (current != head);
+    }
+    void insertBeforeValue(object value, object target)
+    {
+    }
+    void deleteAtLast()
+    {
+
+        // 5 10 12 20
+
+        Node<object> *current = head;
+        Node<object> *previous = nullptr;
+        do
+        {
+            if (current == tail) // current next will be 2ndd last node
+            {
+                Node<object> *victim = current;
+                if (current == head)
+                {
+                    delete victim;
+                    head = nullptr;
+                    tail == nullptr;
+                    return;
+                }
+                previous->next = head;
+                delete victim;
+                return;
+            }
+            previous = current;
+            current = current->next;
+        } while (current != head);
+    }
+
+    void printList()
+    {
+        Node<object> *current = head;
+        if (current == nullptr) // current is nullptr mean the list is empty so return empty from this point
+            return;
         do
         {
             cout << current->data << " ";
@@ -95,7 +156,8 @@ int main()
     list->insertAtEnd(10);
     list->insertAtEnd(20);
     list->insertAtStart(5);
-    list->doublyClear();
+    list->insertAfterValue(12, 10);
+
     list->printList();
 
     return 0;
