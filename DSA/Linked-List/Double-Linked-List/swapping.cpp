@@ -144,27 +144,35 @@ public:
         // now case 3: non-adjacent nodes of linkedlist
         else
         {
-            // put found2 at found1's old position
-            found2->next = found1Next;
-            found2->previous = found1Previous;
+            // 10 20 30 40
 
-            // put found1 at found2's old position
             found1->next = found2Next;
             found1->previous = found2Previous;
 
-            // fix neighbours of found1's old position
-            if (found1Previous != nullptr)
-                found1Previous->next = found2;
+            if (found2Next != nullptr)
+                found2Next->previous = found1;
 
-            if (found1Next != nullptr)
-                found1Next->previous = found2;
-
-            // fix neighbours of found2's old position
             if (found2Previous != nullptr)
                 found2Previous->next = found1;
 
-            if (found2Next != nullptr)
-                found2Next->previous = found1;
+            found2->next = found1Next;
+            found2->previous = found1Previous;
+
+            if (found1Next != nullptr)
+                found1Next->previous = found2;
+            if (found1Previous != nullptr)
+                found1Previous->next = found2;
+            // now chcking head and tail
+            // after swapping i am checking wheather found1 wa head or not and same for found2 node
+
+            if (found1 == head)
+                head = found2;
+            else if (found2 == head)
+                head = found1;
+            if (found1 == tail)
+                tail = found2;
+            else if (found2 == tail)
+                tail = found1;
         }
     }
 };
@@ -177,12 +185,13 @@ int main()
     list->insertAtLast(20);
     list->insertAtLast(30);
     list->insertAtLast(40);
+    list->insertAtLast(50);
 
     list->display();
 
     cout << "\n===================\n";
 
-    list->swapTwoNodes(30, 20);
+    list->swapTwoNodes(10, 40);
     list->display();
 
     return 0;
