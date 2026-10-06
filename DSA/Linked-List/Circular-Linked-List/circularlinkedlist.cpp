@@ -62,7 +62,6 @@ public:
     void doublyClear()
     {
         Node<object> *current = head;
-
         if (head == nullptr)
             return;
         else
@@ -106,8 +105,38 @@ public:
             current = current->next;
         } while (current != head);
     }
-    void insertBeforeValue(object value, object target)
+    void insertBeforeValue(object value, object before)
     {
+        Node<object> *newNode = new Node<object>();
+        Node<object> *current = head;
+        Node<object> *previous = nullptr;
+        newNode->data = value;
+
+        if (head == nullptr)
+        {
+            head = newNode;
+            tail = newNode;
+            tail->next = head;
+            return;
+        }
+        do
+        {
+            if (current->data == before)
+            {
+                if (current == head)
+                {
+                    newNode->next = current;
+                    head = newNode;
+                    tail->next = head;
+                    return;
+                }
+                newNode->next = current;
+                previous->next = newNode;
+                return;
+            }
+            previous = current;
+            current = current->next;
+        } while (current != head);
     }
     void deleteAtLast()
     {
@@ -137,6 +166,28 @@ public:
         } while (current != head);
     }
 
+    void deleteAfterValue(object target)
+    {
+        Node<object> *current = head;
+        Node<object> *previous = nullptr;
+        do
+        {
+
+            if (current->data == target)
+            {
+                if (current == tail)
+                    return;
+
+                Node<object> *victim = current->next;
+                current->next = victim->next;
+                delete victim;
+                return;
+            }
+            previous = current;
+            current = current->next;
+        } while (current != head);
+    }
+
     void printList()
     {
         Node<object> *current = head;
@@ -156,8 +207,8 @@ int main()
     list->insertAtEnd(10);
     list->insertAtEnd(20);
     list->insertAtStart(5);
-    list->insertAfterValue(12, 10);
-
+    list->insertAtStart(2);
+    list->deleteAfterValue(20);
     list->printList();
 
     return 0;
