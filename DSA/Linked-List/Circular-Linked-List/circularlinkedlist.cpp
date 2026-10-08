@@ -357,122 +357,145 @@ public:
 
     void menu()
     {
-        int choice;
+        int choice = -1;
 
-        cout << "\n===== Circular Linked List Menu =====\n";
-        cout << "1. Insert At End\n";
-        cout << "2. Insert At Start\n";
-        cout << "3. Insert After Value\n";
-        cout << "4. Insert Before Value\n";
-        cout << "5. Delete At Last\n";
-        cout << "6. Delete After Value\n";
-        cout << "7. Delete Even Data Nodes\n";
-        cout << "8. Delete Odd Data Nodes\n";
-        cout << "9. Delete Even Position Nodes\n";
-        cout << "10. Josephus\n";
-        cout << "11. Clear List\n";
-        cout << "12. Print List\n";
-        cout << "13. Count List\n";
-        cout << "0. Exit\n";
-
-        cout << "\nEnter your choice: ";
-        cin >> choice;
-
-        switch (choice)
+        while (choice != 0)
         {
-        case 1:
-        {
-            object value;
-            cout << "Enter value: ";
-            cin >> value;
-            insertAtEnd(value);
-            break;
-        }
+            cout << "\n\n===== Circular Linked List =====\n";
+            cout << "1. Insert At End\n";
+            cout << "2. Insert At Start\n";
+            cout << "3. Insert After Value\n";
+            cout << "4. Insert Before Value\n";
+            cout << "5. Delete At Last\n";
+            cout << "6. Delete After Value\n";
+            cout << "7. Delete Even Data Nodes\n";
+            cout << "8. Delete Odd Data Nodes\n";
+            cout << "9. Delete Even Position Nodes\n";
+            cout << "10. Josephus\n";
+            cout << "11. Clear List\n";
+            cout << "12. Print List\n";
+            cout << "13. Count List\n";
+            cout << "0. Exit\n";
 
-        case 2:
-        {
-            object value;
-            cout << "Enter value: ";
-            cin >> value;
-            insertAtStart(value);
-            break;
-        }
+            cout << "\nEnter your choice: ";
+            cin >> choice;
 
-        case 3:
-        {
-            object value, after;
-            cout << "Enter value: ";
-            cin >> value;
-            cout << "Enter value after which to insert: ";
-            cin >> after;
-            insertAfterValue(value, after);
-            break;
-        }
+            switch (choice)
+            {
+            case 1:
+            {
+                object value;
+                cout << "Enter value: ";
+                cin >> value;
+                insertAtEnd(value);
+                break;
+            }
 
-        case 4:
-        {
-            object value, before;
-            cout << "Enter value: ";
-            cin >> value;
-            cout << "Enter value before which to insert: ";
-            cin >> before;
-            insertBeforeValue(value, before);
-            break;
-        }
+            case 2:
+            {
+                object value;
+                cout << "Enter value: ";
+                cin >> value;
+                insertAtStart(value);
+                break;
+            }
 
-        case 5:
-            deleteAtLast();
-            break;
+            case 3:
+            {
+                object value, after;
+                cout << "Enter value: ";
+                cin >> value;
+                cout << "Enter value after which you want to insert: ";
+                cin >> after;
+                insertAfterValue(value, after);
+                break;
+            }
 
-        case 6:
-        {
-            object target;
-            cout << "Enter target value: ";
-            cin >> target;
-            deleteAfterValue(target);
-            break;
-        }
+            case 4:
+            {
+                object value, before;
+                cout << "Enter value: ";
+                cin >> value;
+                cout << "Enter value before which you want to insert: ";
+                cin >> before;
+                insertBeforeValue(value, before);
+                break;
+            }
 
-        case 7:
-            deleteEvenDataNode();
-            break;
+            case 5:
+            {
+                deleteAtLast();
+                break;
+            }
 
-        case 8:
-            deleteOddDataNode();
-            break;
+            case 6:
+            {
+                object target;
+                cout << "Enter target value: ";
+                cin >> target;
+                deleteAfterValue(target);
+                break;
+            }
 
-        case 9:
-            deleteEvenNodes();
-            break;
+            case 7:
+            {
+                deleteEvenDataNode();
+                break;
+            }
 
-        case 10:
-        {
-            object k;
-            cout << "Enter k: ";
-            cin >> k;
-            cout << "Josephus survivor: " << josephus(k) << endl;
-            break;
-        }
+            case 8:
+            {
+                deleteOddDataNode();
+                break;
+            }
 
-        case 11:
-            doublyClear();
-            break;
+            case 9:
+            {
+                deleteEvenNodes();
+                break;
+            }
 
-        case 12:
-            printList();
-            cout << endl;
-            break;
+            case 10:
+            {
+                object k;
+                cout << "Enter k: ";
+                cin >> k;
+                cout << "Josephus Winner: " << josephus(k) << endl;
+                break;
+            }
 
-        case 13:
-            cout << "Total nodes: " << countList() << endl;
-            break;
+            case 11:
+            {
+                doublyClear();
+                break;
+            }
 
-        case 0:
-            cout << "Exiting...\n";
-            break;
+            case 12:
+            {
+                cout << "List: ";
+                printList();
+                cout << endl;
+                break;
+            }
 
-        default:
-            cout << "Invalid choice!\n";
+            case 13:
+            {
+                cout << "Total Nodes: " << countList() << endl;
+                break;
+            }
+
+            case 0:
+            {
+                cout << "Exiting..." << endl;
+                break;
+            }
+
+            default:
+            {
+                cout << "Invalid Choice!" << endl;
+                break;
+            }
+            }
         }
     }
 };
