@@ -141,4 +141,6 @@ int main()
     std::cout << sol->isPalindrome(head) << " ";
 
     sol->printList(head);
+
+    delete sol;
 }
