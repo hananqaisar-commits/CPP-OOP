@@ -4,7 +4,6 @@ using namespace std;
 template <typename object>
 struct singlyNode
 {
-
     object data;
     singlyNode<object> *next;
 };
@@ -53,16 +52,18 @@ public:
         }
     }
 
-    singlyNode<object> *reverseLinkedListFirstHalfFromMid()
+    void reverseLinkedListFromMid() // 1,2,3,4,5,6,7,8 become 4,3,2,1,8,7,6,5
     {
-        if (head == nullptr)
-        {
-            return head;
-        }
+        if (head == nullptr) // if empty then return head
+            return;
+        if (head->next == nullptr) // if there is 1 node then also return
+            return;
 
         int middle = size / 2;
         int count = 0;
         singlyNode<object> *current = head;
+        singlyNode<object> *firstHalfHead = head;
+
         singlyNode<object> *previous = nullptr;
         singlyNode<object> *mid = nullptr;
         singlyNode<object> *next = nullptr;
@@ -76,77 +77,229 @@ public:
             if (count == middle)
             {
                 mid = current;
+                head = previous;
                 break;
             }
         }
-        head->next = current; // it will join the link with second half
-        head = previous;      // now uppdate the head
-
-        if (size % 2 != 0) // if it is even the return the middle node otherwise return next node mean 1,2,3,4 return 3 node
+        singlyNode<object> *secondHalfHead = mid;
+        current = mid;
+        while (current != nullptr)
         {
-            return mid;
+            next = current->next;
+            current->next = previous;
+            previous = current;
+            current = next;
         }
-        return current;
+        // previous is now 8 so i can use that current to link with 1 remeber 1 is the firsthalfhead and our new head is 4
+        firstHalfHead->next = previous; // 1,2,3,4,5,6,7,8 become 4,3,2,1,8,7,6,5
+        tail = secondHalfHead;          // secondHalfHead it is 5
+        tail->next = nullptr;
     }
 
-    bool isPalindrome()
+    void displaySinglyLinkedListReverseRecursively(singlyNode<object> *currentNode)
     {
-        if (head == nullptr) // empty list
-            return true;
-        if (head->next == nullptr) // if there is 1 node
-            return true;
+        if (currentNode == nullptr)
+            return;
 
-        singlyNode<object> *mid = reverseLinkedListFirstHalfFromMid();
-        singlyNode<object> *current1 = head;
-        singlyNode<object> *current2 = mid->next; // if it was odd then it will return middle  node we need middle.next
+        displaySinglyLinkedListReverseRecursively(currentNode->next); // noe move current 1 by 1 node
+        cout << currentNode->data << " ";
+    }
 
-        bool result = false;
-        if (size % 2 != 0) // odd number linkedlist
+    void reverseRecursively(singlyNode<object> *previous, singlyNode<object> *current)
+    {
+        if (current == nullptr) // update the head
         {
-            while (current2 != nullptr)
-            {
-                if (current1->data != current2->data)
-                {
-                    singlyNode<object> *mid = reverseLinkedListFirstHalfFromMid(); // if it is not palindrome then come to normal state and then
-                    return result;
-                }
-                current1 = current1->next;
-                current2 = current2->next;
-            }
-            singlyNode<object> *mid = reverseLinkedListFirstHalfFromMid(); // if it is palindrome then now come into normal state
-            result = true;
+            head = previous;
+            return;
         }
-        else
-        {                   // now even node
-            current2 = mid; // if list was even the we nedd 3rd node
-            while (current2 != nullptr)
-            {
-                if (current1->data != current2->data)
-                {
-                    singlyNode<object> *mid = reverseLinkedListFirstHalfFromMid(); // if it is not palindrome then come to normal state and then
-                    return result;
-                }
-                current1 = current1->next;
-                current2 = current2->next;
-            }
-            singlyNode<object> *mid = reverseLinkedListFirstHalfFromMid(); // if it is palindrome then now come into normal state
-            result = true;
+        reverseRecursively(current, current->next);
+        // now change the links
+        current->next = previous;
+        if (current->next == nullptr) // now uodate the tail
+        {
+            tail = current;
         }
-        return result;
+    }
+    void removeDuplicates()
+    {
+        singlyNode<object> *current = head;
+        while (current != nullptr)
+        {
+            singlyNode<object> *previousRunner = current;
+            singlyNode<object> *runner = current->next;
+            while (runner != nullptr)
+            {
+                if (current->data == runner->data) // if we found that node then dlt that other wise move the runner to next node
+                {
+                    singlyNode<object> *victim = runner;
+                    if (runner == tail)
+                    {
+                        tail = previousRunner;
+                        previousRunner->next = nullptr;
+                        delete victim;
+                        break; // noe break the runner and update the counter
+                    }
+                    else
+                    {
+                        previousRunner->next = runner->next; // updating the link
+                        runner = previousRunner->next;
+                        delete victim;
+                    }
+                }
+                else
+                {
+                    previousRunner = runner;
+                    runner = runner->next;
+                }
+            }
+            current = current->next;
+        }
+    }
+    bool cycleDetection()
+    {
+        singlyNode<object> *slow = head;
+        singlyNode<object> *fast = head;
+
+        while (fast != nullptr && fast->next != nullptr)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    singlyNode<object> *middle()
+    {
+        singlyNode<object> *slow = head;
+        singlyNode<object> *fast = head->next;
+
+        if (head == nullptr) // if list in empty then return
+            return head;
+
+        while (fast != nullptr && fast->next != nullptr)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+    void separateEvenOdd()
+    {
+        singlyLinkedList<object> *evenList = new singlyLinkedList<object>();
+        singlyLinkedList<object> *oddList = new singlyLinkedList<object>();
+
+        singlyNode<object> *current = head;
+        if (head == nullptr)
+            return;
+        while (current != nullptr)
+        {
+            if (current->data % 2 == 0) // even
+                evenList->insertAtEnd(current->data);
+            else
+                oddList->insertAtEnd(current->data);
+            current = current->next;
+        }
+
+        cout << "Even list: ";
+        evenList->printList();
+        cout << endl;
+        cout << "Oddlist: ";
+        oddList->printList();
+    }
+
+    void deleteAllOccurrences(object target)
+    {
+        singlyNode<object> *current = head;
+        singlyNode<object> *previous = nullptr;
+        if (head == nullptr)
+            return;
+
+        while (current != nullptr)
+        {
+            singlyNode<object> *nextNode = current->next;
+            bool currentDeleted = false;
+            if (current->data == target)
+            {
+
+                if (current->data == head->data) // if it is the head
+                {
+                    singlyNode<object> *victim = current;
+                    head = head->next;
+                    currentDeleted = true;
+                    delete victim;
+                }
+                else if (current->data == tail->data) // if it is the tail
+                {
+                    singlyNode<object> *victim = current;
+                    tail = previous;
+                    currentDeleted = true;
+                    delete victim;
+                }
+                else // or it is in the middle
+                {
+                    singlyNode<object> *victim = current;
+
+                    previous->next = current->next;
+                    currentDeleted = true;
+                    delete victim;
+                }
+            }
+            if (!currentDeleted)    // current is not deleted then update the previous
+                previous = current; // if current is not deleted then update the previous
+            current = nextNode;
+        }
     }
 };
-
 int main()
 {
-    singlyLinkedList<int> *singlyList = new singlyLinkedList<int>();
-    singlyList->insertAtEnd(10);
-    singlyList->insertAtEnd(20);
-    singlyList->insertAtEnd(30);
-    singlyList->insertAtEnd(20);
-    singlyList->insertAtEnd(10);
+    // Case 1: Target head par bhi hai aur multiple times bhi
+    singlyLinkedList<int> list1;
+    list1.insertAtEnd(2);
+    list1.insertAtEnd(2);
+    list1.insertAtEnd(1);
+    list1.insertAtEnd(2);
+    list1.insertAtEnd(3);
 
-    cout << singlyList->isPalindrome() << " ";
-    singlyList->printList();
+    cout << "Case 1: ";
+    list1.deleteAllOccurrences(2);
+    list1.printList();
+
+    // Case 2: Target middle mein multiple times hai
+    singlyLinkedList<int> list2;
+    list2.insertAtEnd(1);
+    list2.insertAtEnd(2);
+    list2.insertAtEnd(3);
+    list2.insertAtEnd(2);
+    list2.insertAtEnd(4);
+
+    cout << "Case 2: ";
+    list2.deleteAllOccurrences(2);
+    list2.printList();
+
+    // Case 3: Target tail par hai
+    singlyLinkedList<int> list3;
+    list3.insertAtEnd(1);
+    list3.insertAtEnd(2);
+    list3.insertAtEnd(3);
+    list3.insertAtEnd(3);
+
+    cout << "Case 3: ";
+    list3.deleteAllOccurrences(3);
+    list3.printList();
+
+    // Case 4: Saare nodes target ke equal hain
+    singlyLinkedList<int> list4;
+    list4.insertAtEnd(5);
+    list4.insertAtEnd(5);
+    list4.insertAtEnd(5);
+
+    cout << "Case 4: ";
+    list4.deleteAllOccurrences(5);
+    list4.printList();
 
     return 0;
 }
