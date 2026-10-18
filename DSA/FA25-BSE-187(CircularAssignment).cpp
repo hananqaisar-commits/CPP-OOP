@@ -1,28 +1,31 @@
 #include <iostream>
 using namespace std;
 
+template <typename object>
 struct Node
 {
-    int data;
+    object data;
     Node *next;
 };
+template <typename object>
 class CircularLinkedList
 {
 public:
-    Node *head = nullptr;
-    Node *tail = nullptr;
+    Node<object> *head = nullptr;
+    Node<object> *tail = nullptr;
 
     CircularLinkedList()
     {
         head = nullptr;
         tail = nullptr;
     }
-    void insertAtEnd(int value)
+    void insertAtEnd(object value)
     {
-        Node *current = head;
-        Node *newNode = new Node();
+        Node<object> *newNode = new Node<object>();
+
         newNode->data = value;
 
+        // if circularLinkedList is empty
         if (head == nullptr)
         {
             head = newNode;
@@ -30,14 +33,18 @@ public:
             tail->next = head;
             return;
         }
-        tail->next = newNode;
-        tail = newNode;
-        tail->next = head;
+        else
+        {
+            tail->next = newNode;
+            tail = newNode;
+            tail->next = head;
+            return;
+        }
     }
 
     void display()
     {
-        Node *current = head;
+        Node<object> *current = head;
         if (head == nullptr)
             return;
         do
@@ -47,9 +54,9 @@ public:
         } while (current != head);
         cout << "nullptr\n";
     }
-    void deleteNode(Node *&found, Node *&previous)
+    void deleteNode(Node<object> *&found, Node<object> *&previous)
     {
-        Node *victim = found;
+        Node<object> *victim = found;
         // if there is one node and that node is the victiim
         if (victim == head && victim == tail)
         {
@@ -68,11 +75,11 @@ public:
         delete victim;
     }
 
-    int josephus(int k)
+    object josephus(object k)
     {
-        int count = 0;
-        Node *current = head;
-        Node *previous = tail;
+        object count = 0;
+        Node<object> *current = head;
+        Node<object> *previous = tail;
         while (true)
         {
             if (head == nullptr)
@@ -87,7 +94,7 @@ public:
             count++;
             if (count == k)
             {
-                Node *victim = current;
+                Node<object> *victim = current;
                 current = victim->next; // now the current starts from kth+1 node
                 count = 0;              // reset the count to 0
                 deleteNode(victim, previous);
@@ -99,18 +106,85 @@ public:
             }
         }
     }
+
+    void mainMenu()
+    {
+        int choice;
+
+        do
+        {
+            cout << "\n===== CIRCULAR LINKED LIST MENU =====\n";
+            cout << "1. Insert At End\n";
+            cout << "2. Display List\n";
+            cout << "3. Josephus Problem\n";
+            cout << "4. Exit\n";
+            cout << "Enter choice: ";
+            cin >> choice;
+
+            switch (choice)
+            {
+            case 1:
+            {
+                object value;
+                cout << "Enter value: ";
+                cin >> value;
+
+                insertAtEnd(value);
+                break;
+            }
+
+            case 2:
+                display();
+                break;
+
+            case 3:
+            {
+                if (head == nullptr)
+                {
+                    cout << "List is empty!\n";
+                    break;
+                }
+
+                int k;
+                cout << "Enter counting value (k): ";
+                cin >> k;
+
+                if (k <= 0)
+                {
+                    cout << "k must be greater than zero!\n";
+                    break;
+                }
+
+                object survivor = josephus(k);
+                cout << "Survivor: " << survivor << '\n';
+                break;
+            }
+
+            case 4:
+                cout << "Exiting...\n";
+                break;
+
+            default:
+                cout << "Invalid choice!\n";
+            }
+
+        } while (choice != 4);
+    }
 };
 int main()
 {
-
-    CircularLinkedList *list = new CircularLinkedList();
+    CircularLinkedList<int> *list = new CircularLinkedList<int>();
 
     list->insertAtEnd(10);
     list->insertAtEnd(20);
     list->insertAtEnd(30);
+    list->insertAtEnd(40);
+    list->insertAtEnd(50);
+    list->insertAtEnd(60);
+    list->insertAtEnd(70);
 
-    list->josephus(2);
-    list->display();
+    list->mainMenu();
 
+    delete list;
     return 0;
 }
