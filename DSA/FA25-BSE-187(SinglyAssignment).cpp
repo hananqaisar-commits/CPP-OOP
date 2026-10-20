@@ -274,6 +274,114 @@ public:
             current = nextPair;
         }
     }
+    void mainMenu()
+    {
+        int choice;
+
+        do
+        {
+            cout << "\n========== SINGLY LINKED LIST MENU ==========\n";
+            cout << "1.  Insert At End\n";
+            cout << "2.  Print List\n";
+            cout << "3.  Reverse Linked List From Middle\n";
+            cout << "4.  Display Reverse Recursively\n";
+            cout << "5.  Reverse Recursively\n";
+            cout << "6.  Remove Duplicates\n";
+            cout << "7.  Cycle Detection\n";
+            cout << "8.  Find Middle Node\n";
+            cout << "9.  Separate Even and Odd\n";
+            cout << "10. Delete All Occurrences\n";
+            cout << "11. Swap Adjacent Nodes\n";
+            cout << "12. Exit\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice)
+            {
+            case 1:
+            {
+                object value;
+                cout << "Enter value: ";
+                cin >> value;
+                insertAtEnd(value);
+                break;
+            }
+
+            case 2:
+                printList();
+                cout << '\n';
+                break;
+
+            case 3:
+                reverseLinkedListFromMid();
+                printList();
+                cout << '\n';
+                break;
+
+            case 4:
+                displaySinglyLinkedListReverseRecursively(head);
+                cout << '\n';
+                break;
+
+            case 5:
+                reverseRecursively(nullptr, head);
+                printList();
+                cout << '\n';
+                break;
+
+            case 6:
+                removeDuplicates();
+                printList();
+                cout << '\n';
+                break;
+
+            case 7:
+                if (cycleDetection())
+                    cout << "Cycle detected!\n";
+                else
+                    cout << "No cycle detected.\n";
+                break;
+
+            case 8:
+                if (head == nullptr)
+                    cout << "List is empty.\n";
+                else
+                    cout << "Middle node: " << middle()->data << '\n';
+                break;
+
+            case 9:
+                separateEvenOdd();
+                cout << '\n';
+                break;
+
+            case 10:
+            {
+                object target;
+                cout << "Enter value to delete: ";
+                cin >> target;
+
+                deleteAllOccurrences(target);
+                printList();
+                cout << '\n';
+                break;
+            }
+
+            case 11:
+                swapAdjacentNodes();
+                printList();
+                cout << '\n';
+                break;
+
+            case 12:
+                cout << "Exiting...\n";
+                break;
+
+            default:
+                cout << "Invalid choice!\n";
+            }
+
+        } while (choice != 12);
+    }
 };
 int main()
 {
@@ -287,9 +395,7 @@ int main()
     list1.insertAtEnd(8);
     list1.insertAtEnd(2);
 
-    cout << "Case 1: ";
-    list1.swapAdjacentNodes();
-    list1.printList();
+    list1.mainMenu();
 
     return 0;
 }
