@@ -1,12 +1,34 @@
 #include <iostream>
 using namespace std;
-
 template <typename object>
 struct Node
 {
     object data;
     Node *next;
+
+    Node()
+    {
+    }
 };
+class Task
+{
+public:
+    string priority;
+    string name;
+    string status;
+
+    Task() : priority(""), name(""), status("Pending") {}
+    Task(string p, string n, string s) : priority(p), name(n), status(s) {};
+
+    void display(Node<Task> *current)
+    {
+
+        cout << "Name     : " << current->data.name << '\n';
+        cout << "Priority : " << current->data.priority << '\n';
+        cout << "Status   : " << current->data.status << '\n';
+    }
+};
+
 template <typename object>
 class CircularLinkedList
 {
@@ -106,11 +128,103 @@ public:
             }
         }
     }
+    void mainMenuTask()
+    {
+        int choice;
+        do
+        {
+            cout << "\n===== CIRCULAR TASK MANAGER =====\n";
+            cout << "1. Add Task\n";
+            cout << "2. Display All Tasks\n";
+            cout << "3. Get Next Pending Task\n";
+            cout << "4. Update Task Status\n";
+            cout << "5. Delete Task By Name\n";
+            cout << "6. Exit\n";
+            cout << "Enter choice: ";
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+            {
+                string prior, name, status;
 
+                cout << "Enter priority: ";
+                getline(cin >> ws, prior);
+
+                cout << "Enter task name: ";
+                getline(cin, name);
+
+                cout << "Enter status (Pending/Completed): ";
+                getline(cin, status);
+
+                object newTask(prior, name, status);
+                insertAtEnd(newTask);
+
+                cout << "Task added successfully!\n";
+                break;
+            }
+
+            case 2:
+                displayAllTasks();
+                break;
+
+            case 3:
+            {
+                Node<object> *pending = getpendingTask();
+
+                if (pending != nullptr)
+                {
+                    cout << "\nNext Pending Task\n";
+                    cout << "Name: " << pending->data.name << '\n';
+                    cout << "Priority: " << pending->data.priority << '\n';
+                    cout << "Status: " << pending->data.status << '\n';
+                }
+                else
+                {
+                    cout << "No pending tasks found.\n";
+                }
+
+                break;
+            }
+
+            case 4:
+            {
+                string name, newStatus;
+
+                cout << "Enter task name: ";
+                getline(cin >> ws, name);
+
+                cout << "Enter new status: ";
+                getline(cin, newStatus);
+
+                updateTaskStatus(name, newStatus);
+                break;
+            }
+
+            case 5:
+            {
+                string name;
+
+                cout << "Enter task name to delete: ";
+                getline(cin >> ws, name);
+
+                deleteByName(name);
+                break;
+            }
+
+            case 6:
+                cout << "Exiting Task Manager...\n";
+                break;
+
+            default:
+                cout << "Invalid choice!\n";
+            }
+
+        } while (choice != 6);
+    }
     void mainMenu()
     {
         int choice;
-
         do
         {
             cout << "\n===== CIRCULAR LINKED LIST MENU =====\n";
@@ -170,6 +284,95 @@ public:
 
         } while (choice != 4);
     }
+    void deleteByName(string target)
+    {
+        if (head == nullptr)
+            return;
+
+        Node<object> *current = head;
+        Node<object> *previous = tail;
+
+        do
+        {
+            if (current->data.name == target)
+            {
+                if (head == tail)
+                {
+                    delete current;
+                    head = nullptr;
+                    tail = nullptr;
+                    return;
+                }
+                previous->next = current->next;
+
+                if (current == head)
+                    head = current->next;
+
+                if (current == tail)
+                    tail = previous;
+
+                delete current;
+                return;
+            }
+            previous = current;
+            current = current->next;
+        } while (current != head);
+    }
+    Node<object> *getpendingTask()
+    {
+        if (head == nullptr)
+            return head;
+        Node<object> *current = head;
+        do
+        {
+            if (current->data.status == "Pending" || current->data.status == "pending")
+            {
+                return current;
+            }
+            current = current->next;
+        } while (current != head);
+        return nullptr;
+    }
+
+    void displayAllTasks()
+    {
+        if (head == nullptr)
+        {
+            cout << "No tasks available.\n";
+            return;
+        }
+
+        Node<object> *current = head;
+        do
+        {
+            current->data.display(current);
+            current = current->next;
+        } while (current != head);
+    }
+
+    void updateTaskStatus(string target, string newStatus)
+    {
+        if (head == nullptr)
+        {
+            cout << "Task list is empty.\n";
+            return;
+        }
+        Node<object> *current = head;
+        do
+        {
+            if (current->data.name == target)
+            {
+                current->data.status = newStatus;
+
+                cout << "Task '" << target
+                     << "' status updated to "
+                     << newStatus << ".\n";
+                return;
+            }
+            current = current->next;
+        } while (current != head);
+        cout << "Task not found.\n";
+    }
 };
 int main()
 {
@@ -185,6 +388,15 @@ int main()
 
     list->mainMenu();
 
+    CircularLinkedList<Task> *tasks = new CircularLinkedList<Task>();
+
+    tasks->insertAtEnd(Task("High", "Complete DSA", "Pending"));
+    tasks->insertAtEnd(Task("Medium", "Revise SQL", "Pending"));
+    tasks->insertAtEnd(Task("Low", "Complete Lab", "Completed"));
+
+    tasks->mainMenuTask();
+
     delete list;
+
     return 0;
 }
