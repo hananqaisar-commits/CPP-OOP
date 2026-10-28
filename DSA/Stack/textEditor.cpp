@@ -14,6 +14,10 @@ public:
         size = 0;
         data = new string[capacity];
     }
+    ~Stack()
+    {
+        delete[] data;
+    }
     void resize()
     {
         int newCapacity = capacity * 2;
