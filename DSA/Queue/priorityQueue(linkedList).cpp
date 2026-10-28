@@ -38,7 +38,6 @@ public:
 
             if (tail == nullptr)
                 tail = newNode;
-
             return;
         }
         Node *current = head;
@@ -58,9 +57,22 @@ public:
         Node *current = head;
         while (current != nullptr)
         {
-            cout << current->data << " " << current->priority << " ";
+            cout << current->data << " ";
             current = current->next;
         }
+    }
+    void deqeue()
+    {
+        if (head == nullptr)
+            return;
+        Node *victim = head;
+        if (head->next == nullptr) // if it become empty then return
+        {
+            tail = nullptr;
+            return;
+        }
+        head = head->next;
+        delete victim;
     }
 };
 int main()
@@ -72,6 +84,10 @@ int main()
     q->enqeue(40, 4);
     q->enqeue(50, 1);
 
+    q->display();
+
+    q->deqeue();
+    cout << "\ndisplay\n";
     q->display();
 
     return 0;
