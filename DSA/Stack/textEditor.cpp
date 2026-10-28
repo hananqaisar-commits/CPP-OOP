@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 class Stack
 {
@@ -20,10 +21,12 @@ public:
     }
     void resize()
     {
+        cout << "Resizing: \n";
         int newCapacity = capacity * 2;
+        cout << newCapacity << endl;
         string *newData = new string[newCapacity];
         // copy data to newdata array
-        for (int i = 0; i < capacity; i++)
+        for (int i = 0; i <= top; i++)
         {
             newData[i] = data[i];
         }
@@ -45,6 +48,7 @@ public:
             resize();
 
         data[++top] = value;
+        size++;
         return value;
     }
     string pop()
@@ -54,6 +58,7 @@ public:
 
         string popedData = data[top];
         top--;
+        size--;
         return popedData;
     }
 
@@ -77,6 +82,8 @@ public:
     }
     string peek()
     {
+        if (isEmpty())
+            return "";
         return data[top];
     }
 };
@@ -86,6 +93,8 @@ int main()
     Stack *stack = new Stack();
     Stack *stackUndo = new Stack();
 
+    stack->push("hello");
+    stack->push("hello");
     stack->push("hello");
     stack->State();
     stack->push("world");
