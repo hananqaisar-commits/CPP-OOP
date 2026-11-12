@@ -163,7 +163,7 @@ int main()
             break;
 
         case 2:
-            int choice = -1;
+            int choice;
             cout << "Deqeue?(Choose 1/2)\n"
                  << "1.Critical\n"
                  << "2.Standard\n";
@@ -199,7 +199,6 @@ int main()
 
             break;
         case 4:
-
             cout << "Patient and it's time: \n";
             if (!cq->isEmpty())
                 cq->display();
@@ -239,7 +238,6 @@ int main()
                     cout << "Patient equeud at last\n";
                 }
             }
-
             break;
         default:
             cout << "Invalid\n";
