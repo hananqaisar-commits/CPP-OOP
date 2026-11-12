@@ -71,34 +71,39 @@ public:
     }
     void enqeue(patient *p)
     {
-        array[nextRear()] = *p;
+
+        array[nextIndex(rear)] = *p;
         rear = nextRear();
         size++;
     }
     patient dequeue()
     {
-
-        patient p = array[nextIndex(nextFront())];
+        patient p = array[nextIndex(front - 1)];
         front = nextFront();
         size--;
         return p;
     }
     void display()
     {
+
+        cout << "ID\tName\t\tTime\tPriority\n";
+        cout << "-----------------------------------\n";
         for (int i = 0; i < size; i++)
         {
-            cout << "Id:" << array[nextIndexDisplay(i)].id << " "
-                 << "Name:" << array[nextIndexDisplay(i)].name << " "
-                 << "Time:" << array[nextIndexDisplay(i)].time << " "
-                 << "Priority:" << array[nextIndexDisplay(i)].priority << endl;
+            int ind = nextIndexDisplay(i);
+            cout << array[ind].id << "\t"
+                 << array[ind].name << "\t\t"
+                 << array[ind].time << "\t"
+                 << array[ind].priority << endl;
         }
+        cout << "-----------------------------------\n\n";
     }
 
     bool roundRobin()
     {
-        array[nextIndex(front)].time = array[nextIndex(front)].time - 3;
+        array[nextIndex(front - 1)].time = array[nextIndex(front - 1)].time - 3;
         bool isExamined = false;
-        if (array[nextIndex(front)].time <= 0)
+        if (array[nextIndex(front - 1)].time <= 0)
         {
             isExamined = true;
             return isExamined;
@@ -138,13 +143,46 @@ int main()
             cin >> newPatient->time;
 
             if (newPatient->priority == 1)
+            {
+                if (cq->isFull())
+                {
+                    cout << "Critical queue is full\n";
+                    break;
+                }
                 cq->enqeue(newPatient);
+            }
             else
+            {
+                if (sq->isFull())
+                {
+                    cout << "Critical queue is full\n";
+                    break;
+                }
                 sq->enqeue(newPatient);
+            }
             break;
 
         case 2:
-            cq->dequeue();
+            int choice = -1;
+            cout << "Deqeue?(Choose 1/2)\n"
+                 << "1.Critical\n"
+                 << "2.Standard\n";
+            cin >> choice;
+
+            if (choice == 1 && !cq->isEmpty())
+                cq->dequeue();
+
+            else if (choice == 2 && !sq->isEmpty())
+                sq->dequeue();
+            else
+            {
+                if (choice != 1 && choice != 2)
+                {
+                    cout << "Invalid choice\n";
+                    break;
+                }
+                cout << "Empty Queue\n";
+            }
             break;
         case 3:
             cout << "Critical Patients:\n";
@@ -161,10 +199,21 @@ int main()
 
             break;
         case 4:
+
+            cout << "Patient and it's time: \n";
+            if (!cq->isEmpty())
+                cq->display();
+            if (!sq->isEmpty())
+                sq->display();
+
+            cout << "Round Robin Start: \n";
             while (!cq->isEmpty()) // if critical is not empty then process critical first
             {
-                if (cq->roundRobin()) // if examination for 1 patient is complketed then discharge that one
+                if (cq->roundRobin())
+                { // if examination for 1 patient is complketed then discharge that one
                     patient p = cq->dequeue();
+                    cout << p.name << " examined/discharged from critical list\n";
+                }
                 else
                 {
                     cq->display();
@@ -176,17 +225,21 @@ int main()
             }
             while (!sq->isEmpty())
             {
-                if (sq->roundRobin()) // if examination for 1 patient is complketed then discharge that one
+                if (sq->roundRobin())
+                { // if examination for 1 patient is complketed then discharge that one
                     patient p = sq->dequeue();
+                    cout << p.name << " examined/discharged from normal queue\n";
+                }
                 else
                 {
                     sq->display();
                     patient p = sq->dequeue();
                     cout << "Patient dequeud after 3 minutes\n";
-                    cq->enqeue(&p);
+                    sq->enqeue(&p);
                     cout << "Patient equeud at last\n";
                 }
             }
+
             break;
         default:
             cout << "Invalid\n";
