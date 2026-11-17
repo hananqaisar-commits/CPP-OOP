@@ -94,9 +94,23 @@ public:
         cout << current->data << " ";
         displayInorder(current->right);
     }
+    void displayPreorder(treeNode<object> *current)
+    {
+        if (current == nullptr)
+        {
+            return;
+        }
+        cout << current->data << " ";
+        displayPreorder(current->left);
+        displayPreorder(current->right);
+    }
     void displayInorder()
     {
         displayInorder(root);
+    }
+    void displayPreorder()
+    {
+        displayPreorder(root);
     }
 };
 int main()
