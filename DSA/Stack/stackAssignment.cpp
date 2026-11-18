@@ -287,9 +287,7 @@ public:
                 stackCreated->push(result);
             }
             else
-            {
                 stackCreated->push(ch - '0');
-            }
         }
         cout << stackCreated->data[stackCreated->top] << endl;
     }
@@ -345,7 +343,7 @@ int main()
     // Stack<int> *stackList = new Stack<int>();
     Stack<char> *stackList2 = new Stack<char>();
 
-    string array = "A*B/C";
+    string array = "ABC*B/C";
 
     // stackList->postFixEvaluation(array);
     cout << stackList2->convertPostfix(array);
