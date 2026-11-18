@@ -89,7 +89,6 @@ public:
 };
 int main()
 {
-
     Stack *stack = new Stack();
     Stack *stackUndo = new Stack();
 
@@ -102,14 +101,11 @@ int main()
     stack->print();
     stack->push("delete hello");
     stack->print();
-
     stackUndo->push(stack->pop());
     stack->print();
-
     cout << "\nUndo operation is performed:\n\n";
     stack->push(stackUndo->pop());
     stack->print();
-
     delete stack;
     delete stackUndo;
     return 0;
