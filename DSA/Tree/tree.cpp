@@ -58,19 +58,60 @@ public:
         }
     }
 
-    void displayInorder(treeNode<object> *current)
+    void displayInOrder(treeNode<object> *current)
     {
         if (current == nullptr)
         {
             return;
         }
-        displayInorder(current->left);
+        displayInOrder(current->left);
         cout << current->data << " ";
-        displayInorder(current->right);
+        displayInOrder(current->right);
     }
-    void displayInorder()
+    void displayInOrder()
     {
-        displayInorder(root);
+        displayInOrder(root);
+    }
+    void displayInOrder()
+    {
+        displayInOrder(root);
+    }
+    void displayPreOrder(treeNode<object> *current)
+    {
+        if (current == nullptr)
+        {
+            return;
+        }
+        cout << current->data << " ";
+        displayPreOrder(current->left);
+        displayPreOrder(current->right);
+    }
+    void displayPreOrder()
+    {
+        displayPreOrder(root);
+    }
+    void displayPostOrder(treeNode<object> *current)
+    {
+        if (current == nullptr)
+        {
+            return;
+        }
+        displayPostOrder(current->left);
+        displayPostOrder(current->right);
+        cout << current->data << " ";
+    }
+    void displayPostOrder()
+    {
+        displayPostOrder(root);
+    }
+    void insertRecursively(object value)
+    {
+        treeNode<object> *current = root;
+        if (current == nullptr)
+        {
+            cout << "Inserted into root\n";
+            return;
+        }
     }
 };
 int main()
@@ -80,8 +121,9 @@ int main()
     t->insertion(20);
     t->insertion(30);
     t->insertion(40);
+    t->insertion(40);
 
-    t->displayInorder();
+    t->displayInOrder();
     delete t;
 
     return 0;
