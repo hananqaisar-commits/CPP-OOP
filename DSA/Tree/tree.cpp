@@ -223,6 +223,7 @@ public:
 int main()
 {
     tree<int> *t = new tree<int>();
+
     t->insertion(50);
     t->insertion(30);
     t->insertion(70);
@@ -231,29 +232,108 @@ int main()
     t->insertion(60);
     t->insertion(80);
     t->insertion(10);
-    t->insertion(10);
     t->insertion(35);
     t->insertion(65);
 
-    int count = 0;
-    int count2 = 0;
+    int choice;
+    int value;
+    do
+    {
+        cout << "\n========== BST MENU ==========\n";
 
-    t->displayInOrder();
-    cout << endl;
-    cout << "Total Leafs: " << t->countLeafs(t->root, count) << " \n";
-    cout << "Total Nodes: " << t->countNodes(t->root, count2) << " \n";
+        cout << "\n--- Normal Traversals ---\n";
+        cout << "1. Inorder (Infix)\n";
+        cout << "2. Preorder (Prefix)\n";
+        cout << "3. Postorder (Postfix)\n";
 
-    t->displayPreOrderRightPriority(t->root);
-    cout << endl;
-    t->displayInOrderRightPriority(t->root);
-    cout << endl;
-    t->displayPostOrderRightPriority(t->root);
-    cout << endl;
-    treeNode<int> *founded = t->searchNode(35);
-    cout << founded->data << " \n";
-    treeNode<int> *maxNode = t->maxNode();
-    cout << "Max Node: " << maxNode->data << " \n";
+        cout << "\n--- Right Priority Traversals ---\n";
+        cout << "4. Inorder Right Priority (RNL)\n";
+        cout << "5. Preorder Right Priority (NRL)\n";
+        cout << "6. Postorder Right Priority (RLN)\n";
 
+        cout << "\n--- Other Operations ---\n";
+        cout << "7. Search Node\n";
+        cout << "8. Count Leaf Nodes\n";
+        cout << "9. Count Total Nodes\n";
+        cout << "10. Find Maximum Node\n";
+
+        cout << "\n0. Exit\n";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "Inorder: ";
+            t->displayInOrder();
+            cout << endl;
+            break;
+        case 2:
+            cout << "Preorder: ";
+            t->displayPreOrder();
+            cout << endl;
+            break;
+        case 3:
+            cout << "Postorder: ";
+            t->displayPostOrder();
+            cout << endl;
+            break;
+        case 4:
+            cout << "Inorder Right Priority: ";
+            t->displayInOrderRightPriority(t->root);
+            cout << endl;
+            break;
+        case 5:
+            cout << "Preorder Right Priority: ";
+            t->displayPreOrderRightPriority(t->root);
+            cout << endl;
+            break;
+        case 6:
+            cout << "Postorder Right Priority: ";
+            t->displayPostOrderRightPriority(t->root);
+            cout << endl;
+            break;
+        case 7:
+        {
+            cout << "Enter value to search: ";
+            cin >> value;
+            treeNode<int> *found = t->searchNode(value);
+            if (found != nullptr)
+                cout << "Node Found: " << found->data << endl;
+            else
+                cout << "Node Not Found!\n";
+            break;
+        }
+        case 8:
+        {
+            int count = 0;
+            t->countLeafs(t->root, count);
+            cout << "Total Leafs: " << count << endl;
+            break;
+        }
+        case 9:
+        {
+            int count = 0;
+            t->countNodes(t->root, count);
+            cout << "Total Nodes: " << count << endl;
+            break;
+        }
+        case 10:
+        {
+            treeNode<int> *maxNode = t->maxNode();
+            if (maxNode != nullptr)
+                cout << "Maximum Node: " << maxNode->data << endl;
+            else
+                cout << "Tree is Empty!\n";
+            break;
+        }
+        case 0:
+            cout << "Program Exited!\n";
+            break;
+        default:
+            cout << "Invalid Choice! Try Again.\n";
+        }
+    } while (choice != 0);
     delete t;
+
     return 0;
 }
