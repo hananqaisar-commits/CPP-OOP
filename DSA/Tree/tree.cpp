@@ -129,7 +129,6 @@ public:
         {
             return 0;
         }
-
         if (current->left == nullptr && current->right == nullptr)
         {
             count++;
@@ -162,6 +161,64 @@ public:
         cout << "Node not found\n";
         return nullptr;
     }
+
+    int countNodes(treeNode<object> *current, int &count)
+    {
+        if (current == nullptr)
+        {
+            return 0;
+        }
+        count++;
+        countNodes(current->left, count);
+        countNodes(current->right, count);
+        return count;
+    }
+    void displayPreOrderRightPriority(treeNode<object> *current)
+    {
+        if (current == nullptr)
+            return;
+
+        cout << current->data << " ";
+        displayPreOrderRightPriority(current->right);
+        displayPreOrderRightPriority(current->left);
+    }
+
+    void displayInOrderRightPriority(treeNode<object> *current)
+    {
+        if (current == nullptr)
+            return;
+
+        displayInOrderRightPriority(current->right);
+        cout << current->data << " ";
+        displayInOrderRightPriority(current->left);
+    }
+
+    void displayPostOrderRightPriority(treeNode<object> *current)
+    {
+        if (current == nullptr)
+            return;
+
+        displayPostOrderRightPriority(current->right);
+        displayPostOrderRightPriority(current->left);
+        cout << current->data << " ";
+    }
+    treeNode<object> *maxNode()
+    {
+        treeNode<object> *maxNodeCount = new treeNode<object>();
+        maxNodeCount->data = 0;
+        maxNodeCount->left = nullptr;
+        maxNodeCount->right = nullptr;
+        treeNode<object> *current = root;
+        while (current != nullptr)
+        {
+            if (current->data > maxNodeCount->data)
+            {
+                maxNodeCount = current;
+                current = current->right;
+            }
+        }
+        return maxNodeCount;
+    }
 };
 int main()
 {
@@ -174,16 +231,29 @@ int main()
     t->insertion(60);
     t->insertion(80);
     t->insertion(10);
+    t->insertion(10);
     t->insertion(35);
     t->insertion(65);
 
     int count = 0;
+    int count2 = 0;
 
+    t->displayInOrder();
+    cout << endl;
     cout << "Total Leafs: " << t->countLeafs(t->root, count) << " \n";
-    t->displayPreOrder();
+    cout << "Total Nodes: " << t->countNodes(t->root, count2) << " \n";
 
+    t->displayPreOrderRightPriority(t->root);
+    cout << endl;
+    t->displayInOrderRightPriority(t->root);
+    cout << endl;
+    t->displayPostOrderRightPriority(t->root);
+    cout << endl;
     treeNode<int> *founded = t->searchNode(35);
     cout << founded->data << " \n";
+    treeNode<int> *maxNode = t->maxNode();
+    cout << "Max Node: " << maxNode->data << " \n";
+
     delete t;
     return 0;
 }
